@@ -7,7 +7,7 @@
   <meta name="description" content="매일 새로운 한 줄 광고를 보여주는 오늘의 광고" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=SUIT:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=SUIT:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="/style.css" rel="stylesheet" />
 </head>
 <body>
@@ -15,8 +15,14 @@
   <div class="orb orb-b" aria-hidden="true"></div>
 
   <main class="app">
-    <p class="eyebrow">Daily One-Liner</p>
-    <h1>오늘의 광고</h1>
+    <header class="top-header">
+      <h1 class="site-title">오늘의 광고</h1>
+      <nav class="menu-box" aria-label="주요 메뉴">
+        <a href="/archive.html">아카이브</a>
+        <a href="/contact.html">콘택트</a>
+      </nav>
+      <p class="eyebrow">매일 새로운 광고 한 줄이 업데이트됩니다.</p>
+    </header>
 
     <section class="card" aria-live="polite">
       <p id="adLine" class="ad-line">광고 문구를 불러오는 중...</p>

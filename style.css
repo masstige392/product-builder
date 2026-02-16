@@ -23,10 +23,8 @@ body {
   background: radial-gradient(circle at 20% 10%, #fff4cf 0%, transparent 36%),
     radial-gradient(circle at 92% 80%, #ffc58f 0%, transparent 30%),
     linear-gradient(135deg, var(--bg-start), var(--bg-end));
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  overflow: hidden;
+  padding: 18px 24px 28px;
+  overflow-x: hidden;
 }
 
 .orb {
@@ -57,25 +55,55 @@ body {
 
 .app {
   width: min(680px, 100%);
+  margin: 0 auto;
   z-index: 1;
   animation: reveal 600ms ease-out both;
 }
 
+.top-header {
+  margin-bottom: 18px;
+}
+
 .eyebrow {
-  margin: 0;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  margin: 12px 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
   color: #7b2c1d;
 }
 
-h1 {
-  margin: 6px 0 16px;
-  font-family: "Black Han Sans", sans-serif;
-  font-size: clamp(2.2rem, 7vw, 4.4rem);
-  letter-spacing: -0.02em;
-  line-height: 1;
+.site-title {
+  margin: 0 0 12px;
+  font-family: "SUIT", sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 6.8vw, 3.8rem);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.menu-box {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: fit-content;
+  min-width: 260px;
+  background: #7a8545;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 11px 14px;
+}
+
+.menu-box a {
+  color: #f4f1db;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: opacity 120ms ease;
+}
+
+.menu-box a:hover {
+  opacity: 0.72;
 }
 
 .card {
@@ -129,11 +157,17 @@ h1 {
 
 @media (max-width: 640px) {
   body {
-    padding: 16px;
+    padding: 14px 16px 20px;
   }
 
   .card {
     padding: 18px;
+  }
+
+  .menu-box {
+    width: 100%;
+    min-width: 0;
+    justify-content: flex-start;
   }
 
   .meta-row {
