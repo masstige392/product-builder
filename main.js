@@ -14,6 +14,11 @@ const ads = [
 const adLine = document.getElementById("adLine");
 const dateLabel = document.getElementById("dateLabel");
 const countdownLabel = document.getElementById("countdownLabel");
+const topHeader = document.querySelector(".top-header");
+const joinForm = document.querySelector("form.form-grid");
+const submissionList = document.getElementById("submissionList");
+const joinStatus = document.getElementById("joinStatus");
+const STORAGE_KEY = "today-ad-submissions";
 
 function getDayIndex(date = new Date()) {
   const utcMidnight = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
@@ -46,6 +51,10 @@ function formatRemaining(ms) {
 }
 
 function updateCountdown() {
+  if (!countdownLabel) {
+    return;
+  }
+
   const now = new Date();
   const nextDraw = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   const remaining = nextDraw - now;
@@ -57,8 +66,110 @@ function updateCountdown() {
   countdownLabel.textContent = `다음 광고 추첨까지 ${formatRemaining(remaining)}`;
 }
 
+function setupHeaderMotion() {
+  if (!topHeader) {
+    return;
+  }
+
+  let lastScrollY = window.scrollY;
+  let hidden = false;
+
+  topHeader.classList.add("is-floating");
+
+  window.addEventListener("scroll", () => {
+    const current = window.scrollY;
+    const delta = current - lastScrollY;
+
+    if (current > 48 && delta > 0 && !hidden) {
+      topHeader.classList.add("is-hidden");
+      hidden = true;
+    } else if ((delta < 0 || current < 18) && hidden) {
+      topHeader.classList.remove("is-hidden");
+      hidden = false;
+    }
+
+    lastScrollY = current;
+  });
+}
+
+function readStoredSubmissions() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function writeStoredSubmissions(items) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+}
+
+function handleJoinForm() {
+  if (!joinForm || !location.pathname.endsWith("/join.html")) {
+    return;
+  }
+
+  joinForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(joinForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const adCopy = String(formData.get("ad_copy") || "").trim();
+    const consent = formData.get("consent");
+
+    if (!name || !email || !adCopy || !consent) {
+      if (joinStatus) {
+        joinStatus.textContent = "모든 항목을 입력하고 동의해 주세요.";
+      }
+      return;
+    }
+
+    const items = readStoredSubmissions();
+    items.unshift({
+      name,
+      email,
+      adCopy,
+      createdAt: new Date().toISOString()
+    });
+    writeStoredSubmissions(items.slice(0, 100));
+
+    joinForm.reset();
+    if (joinStatus) {
+      joinStatus.textContent = "제출 완료. Archive 페이지에서 로컬 저장 목록을 확인할 수 있습니다.";
+    }
+  });
+}
+
+function renderArchiveSubmissions() {
+  if (!submissionList || !location.pathname.endsWith("/archive.html")) {
+    return;
+  }
+
+  const items = readStoredSubmissions();
+  submissionList.innerHTML = "";
+
+  if (!items.length) {
+    const li = document.createElement("li");
+    li.textContent = "저장된 제출 내역이 없습니다. Join에서 먼저 제출해 주세요.";
+    submissionList.appendChild(li);
+    return;
+  }
+
+  items.slice(0, 20).forEach((item) => {
+    const li = document.createElement("li");
+    const date = new Date(item.createdAt).toLocaleDateString("ko-KR");
+    li.textContent = `${date}: ${item.adCopy} (${item.name})`;
+    submissionList.appendChild(li);
+  });
+}
+
 if (adLine && dateLabel && countdownLabel) {
   renderTodayAd();
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
+
+setupHeaderMotion();
+handleJoinForm();
+renderArchiveSubmissions();
