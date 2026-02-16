@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>오늘의 광고</title>
+  <title>오늘의 당첨광고</title>
   <meta name="description" content="매일 새로운 한 줄 광고를 보여주는 오늘의 광고" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,19 +16,24 @@
 
   <main class="app">
     <header class="top-header">
-      <h1 class="site-title">오늘의 광고</h1>
+      <h1 class="site-title">오늘의 당첨광고</h1>
       <nav class="menu-box" aria-label="주요 메뉴">
-        <a href="/archive.html">아카이브</a>
-        <a href="/contact.html">콘택트</a>
+        <a class="active" href="/index.html">Home</a>
+        <a href="/archive.html">Archive</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/join.html">Join</a>
+        <a href="/rules.html">Rules</a>
+        <a href="/report.html">Report</a>
+        <a href="/legal.html">Legal</a>
       </nav>
-      <p class="eyebrow">매일 새로운 광고 한 줄이 업데이트됩니다.</p>
+      <p class="eyebrow">매일 한 개의 광고가 추첨되어 메인 화면에 표시됩니다.</p>
     </header>
 
     <section class="card" aria-live="polite">
       <p id="adLine" class="ad-line">광고 문구를 불러오는 중...</p>
       <div class="meta-row">
         <span id="dateLabel" class="date-label"></span>
-        <button id="refreshBtn" type="button">다시 보기</button>
+        <span id="countdownLabel" class="countdown-label">다음 광고 추첨까지 계산 중...</span>
       </div>
     </section>
   </main>

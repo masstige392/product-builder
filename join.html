@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join | 오늘의 당첨광고</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=SUIT:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="/style.css" rel="stylesheet" />
+</head>
+<body>
+  <main class="app">
+    <header class="top-header">
+      <h1 class="site-title">Join</h1>
+      <nav class="menu-box" aria-label="주요 메뉴">
+        <a href="/index.html">Home</a>
+        <a href="/archive.html">Archive</a>
+        <a href="/contact.html">Contact</a>
+        <a class="active" href="/join.html">Join</a>
+        <a href="/rules.html">Rules</a>
+        <a href="/report.html">Report</a>
+        <a href="/legal.html">Legal</a>
+      </nav>
+      <p class="eyebrow">하루 1회, 나만의 한 줄 광고를 제출하세요.</p>
+    </header>
+
+    <section class="page-card">
+      <h2 class="page-title">Ad Submission Form</h2>
+      <form class="form-grid">
+        <label for="join-name">이름</label>
+        <input id="join-name" name="name" type="text" placeholder="홍길동" />
+
+        <label for="join-email">이메일</label>
+        <input id="join-email" name="email" type="email" placeholder="you@example.com" />
+
+        <label for="join-ad">광고 문구</label>
+        <textarea id="join-ad" name="ad_copy" maxlength="120" placeholder="120자 이내로 광고 문구를 입력해 주세요."></textarea>
+
+        <div class="checkbox-row">
+          <input id="join-consent" name="consent" type="checkbox" />
+          <label for="join-consent">이용약관과 개인정보처리방침에 동의합니다.</label>
+        </div>
+
+        <button class="solid-btn" type="submit">제출하기</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report | 오늘의 당첨광고</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=SUIT:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="/style.css" rel="stylesheet" />
+</head>
+<body>
+  <main class="app">
+    <header class="top-header">
+      <h1 class="site-title">Report</h1>
+      <nav class="menu-box" aria-label="주요 메뉴">
+        <a href="/index.html">Home</a>
+        <a href="/archive.html">Archive</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/join.html">Join</a>
+        <a href="/rules.html">Rules</a>
+        <a class="active" href="/report.html">Report</a>
+        <a href="/legal.html">Legal</a>
+      </nav>
+      <p class="eyebrow">버그/오류/부적절한 광고를 신고할 수 있습니다.</p>
+    </header>
+
+    <section class="page-card">
+      <h2 class="page-title">Report Form</h2>
+      <form class="form-grid">
+        <label for="report-type">신고 유형</label>
+        <select id="report-type" name="report_type">
+          <option>버그</option>
+          <option>광고 내용 신고</option>
+          <option>결제 문제</option>
+          <option>기타</option>
+        </select>
+
+        <label for="report-detail">상세 내용</label>
+        <textarea id="report-detail" name="detail" placeholder="문제를 자세히 적어 주세요."></textarea>
+
+        <label for="report-email">회신 이메일</label>
+        <input id="report-email" name="email" type="email" placeholder="you@example.com" />
+
+        <button class="solid-btn" type="submit">신고 제출</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

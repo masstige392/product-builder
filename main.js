@@ -13,7 +13,7 @@ const ads = [
 
 const adLine = document.getElementById("adLine");
 const dateLabel = document.getElementById("dateLabel");
-const refreshBtn = document.getElementById("refreshBtn");
+const countdownLabel = document.getElementById("countdownLabel");
 
 function getDayIndex(date = new Date()) {
   const utcMidnight = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
@@ -37,5 +37,28 @@ function renderTodayAd() {
   dateLabel.textContent = `${formatDateKR(now)} 기준`;
 }
 
-refreshBtn.addEventListener("click", renderTodayAd);
-renderTodayAd();
+function formatRemaining(ms) {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+function updateCountdown() {
+  const now = new Date();
+  const nextDraw = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const remaining = nextDraw - now;
+
+  if (remaining <= 0) {
+    renderTodayAd();
+  }
+
+  countdownLabel.textContent = `다음 광고 추첨까지 ${formatRemaining(remaining)}`;
+}
+
+if (adLine && dateLabel && countdownLabel) {
+  renderTodayAd();
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
