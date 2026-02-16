@@ -19,14 +19,21 @@
       <h1 class="site-title">오늘의 당첨광고</h1>
       <nav class="menu-box" aria-label="주요 메뉴">
         <a class="active" href="/index.html">Home</a>
-        <a href="/archive.html">Archive</a>
+        <div class="menu-item menu-archive">
+          <a href="/archive.html">Archive</a>
+          <ul class="archive-years" aria-label="Archive by year">
+            <li><a href="/archive.html?year=2026">2026</a></li>
+            <li><a href="/archive.html?year=2025">2025</a></li>
+            <li><a href="/archive.html?year=2024">2024</a></li>
+            <li><a href="/archive.html?year=2023">2023</a></li>
+          </ul>
+        </div>
         <a href="/contact.html">Contact</a>
         <a href="/join.html">Join</a>
         <a href="/rules.html">Rules</a>
         <a href="/report.html">Report</a>
         <a href="/legal.html">Legal</a>
       </nav>
-      <p class="eyebrow">매일 한 개의 광고가 추첨되어 메인 화면에 표시됩니다.</p>
     </header>
 
     <section class="card" aria-live="polite">
@@ -35,6 +42,26 @@
         <span id="dateLabel" class="date-label"></span>
         <span id="countdownLabel" class="countdown-label">다음 광고 추첨까지 계산 중...</span>
       </div>
+    </section>
+
+    <section class="page-card">
+      <h2 class="page-title">오늘 진행 방식</h2>
+      <p class="page-copy">매일 접수된 광고 문구 중 1개를 추첨해 메인에 노출합니다. 아래 섹션은 서비스 소개와 예시 콘텐츠입니다.</p>
+    </section>
+
+    <section class="page-card">
+      <h2 class="page-title">Recent Notes</h2>
+      <ul class="page-list">
+        <li>광고 문구는 심사 후 추첨 대상으로 등록됩니다.</li>
+        <li>선정된 문구는 하루 동안 메인 화면에 표시됩니다.</li>
+        <li>추첨 후 결과는 Archive에서 확인할 수 있습니다.</li>
+        <li>신고 접수는 Report 페이지에서 진행됩니다.</li>
+      </ul>
+    </section>
+
+    <section class="page-card">
+      <h2 class="page-title">서비스 안내</h2>
+      <p class="page-copy">스크롤 테스트를 위해 본문 길이를 확장했습니다. 이후 실제 프로젝트 콘텐츠로 교체할 수 있습니다.</p>
     </section>
   </main>
 

@@ -15,19 +15,26 @@
       <h1 class="site-title">Report</h1>
       <nav class="menu-box" aria-label="주요 메뉴">
         <a href="/index.html">Home</a>
-        <a href="/archive.html">Archive</a>
+        <div class="menu-item menu-archive">
+          <a href="/archive.html">Archive</a>
+          <ul class="archive-years" aria-label="Archive by year">
+            <li><a href="/archive.html?year=2026">2026</a></li>
+            <li><a href="/archive.html?year=2025">2025</a></li>
+            <li><a href="/archive.html?year=2024">2024</a></li>
+            <li><a href="/archive.html?year=2023">2023</a></li>
+          </ul>
+        </div>
         <a href="/contact.html">Contact</a>
         <a href="/join.html">Join</a>
         <a href="/rules.html">Rules</a>
         <a class="active" href="/report.html">Report</a>
         <a href="/legal.html">Legal</a>
       </nav>
-      <p class="eyebrow">버그/오류/부적절한 광고를 신고할 수 있습니다.</p>
     </header>
 
     <section class="page-card">
       <h2 class="page-title">Report Form</h2>
-      <form class="form-grid">
+      <form class="form-grid" id="reportForm">
         <label for="report-type">신고 유형</label>
         <select id="report-type" name="report_type">
           <option>버그</option>
@@ -43,6 +50,7 @@
         <input id="report-email" name="email" type="email" placeholder="you@example.com" />
 
         <button class="solid-btn" type="submit">신고 제출</button>
+        <p id="reportStatus" class="status-text"></p>
       </form>
     </section>
   </main>

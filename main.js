@@ -18,6 +18,8 @@ const topHeader = document.querySelector(".top-header");
 const joinForm = document.querySelector("form.form-grid");
 const submissionList = document.getElementById("submissionList");
 const joinStatus = document.getElementById("joinStatus");
+const reportForm = document.getElementById("reportForm");
+const reportStatus = document.getElementById("reportStatus");
 const STORAGE_KEY = "today-ad-submissions";
 
 function getDayIndex(date = new Date()) {
@@ -147,6 +149,7 @@ function renderArchiveSubmissions() {
   }
 
   const items = readStoredSubmissions();
+  const selectedYear = new URLSearchParams(window.location.search).get("year");
   submissionList.innerHTML = "";
 
   if (!items.length) {
@@ -156,11 +159,60 @@ function renderArchiveSubmissions() {
     return;
   }
 
-  items.slice(0, 20).forEach((item) => {
+  const filtered = selectedYear
+    ? items.filter((item) => String(new Date(item.createdAt).getFullYear()) === selectedYear)
+    : items;
+
+  if (!filtered.length) {
+    const li = document.createElement("li");
+    li.textContent = `${selectedYear}년 제출 내역이 없습니다.`;
+    submissionList.appendChild(li);
+    return;
+  }
+
+  filtered.slice(0, 20).forEach((item) => {
     const li = document.createElement("li");
     const date = new Date(item.createdAt).toLocaleDateString("ko-KR");
     li.textContent = `${date}: ${item.adCopy} (${item.name})`;
     submissionList.appendChild(li);
+  });
+}
+
+function handleReportForm() {
+  if (!reportForm || !location.pathname.endsWith("/report.html")) {
+    return;
+  }
+
+  reportForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(reportForm);
+    const reportType = String(formData.get("report_type") || "").trim();
+    const detail = String(formData.get("detail") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+
+    if (!reportType || !detail || !email) {
+      if (reportStatus) {
+        reportStatus.textContent = "모든 항목을 입력해 주세요.";
+      }
+      return;
+    }
+
+    const subject = `[Today Ad Report] ${reportType}`;
+    const body = [
+      `Report Type: ${reportType}`,
+      `Reply Email: ${email}`,
+      "",
+      "Detail:",
+      detail
+    ].join("\n");
+
+    const mailto = `mailto:csg090203@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+
+    if (reportStatus) {
+      reportStatus.textContent = "메일 앱이 열리지 않으면 csg090203@gmail.com 으로 직접 보내주세요.";
+    }
   });
 }
 
@@ -173,3 +225,4 @@ if (adLine && dateLabel && countdownLabel) {
 setupHeaderMotion();
 handleJoinForm();
 renderArchiveSubmissions();
+handleReportForm();

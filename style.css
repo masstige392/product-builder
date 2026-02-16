@@ -3,7 +3,7 @@
   --ink: #101010;
   --muted: #5f5f5f;
   --line: #d8d8d8;
-  --olive: #6f7950;
+  --olive: #8f9b68;
   --olive-ink: #f7f7f2;
 }
 
@@ -47,6 +47,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   transition: transform 260ms ease, opacity 180ms ease;
 }
 
@@ -71,12 +72,16 @@ body {
   color: var(--olive-ink);
   font-size: clamp(1.8rem, 4.4vw, 3rem);
   letter-spacing: -0.015em;
+  text-align: center;
 }
 
 .menu-box {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 14px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .menu-box a {
@@ -96,11 +101,37 @@ body {
   text-underline-offset: 3px;
 }
 
-.eyebrow {
-  margin: 10px auto 0;
-  color: #eef0e5;
-  font-size: 0.88rem;
-  font-weight: 400;
+.menu-item {
+  position: relative;
+}
+
+.archive-years {
+  margin: 0;
+  padding: 8px 10px;
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 92px;
+  background: #f2f4e8;
+  border: 1px solid #cad1b4;
+  border-radius: 8px;
+  display: none;
+  z-index: 25;
+}
+
+.archive-years li + li {
+  margin-top: 4px;
+}
+
+.archive-years a {
+  color: #2a2f1e;
+  font-size: 0.86rem;
+}
+
+.menu-archive:hover .archive-years {
+  display: block;
 }
 
 .card,
