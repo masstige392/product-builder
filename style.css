@@ -48,18 +48,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: transform 260ms ease, opacity 180ms ease;
+  will-change: transform;
 }
 
 .top-header > * {
   width: min(980px, calc(100% - 32px));
   margin-left: auto;
   margin-right: auto;
-}
-
-.top-header.is-hidden {
-  transform: translateY(-104%);
-  opacity: 0;
 }
 
 .top-header.is-floating {

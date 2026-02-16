@@ -74,23 +74,58 @@ function setupHeaderMotion() {
   }
 
   let lastScrollY = window.scrollY;
-  let hidden = false;
+  let headerHeight = topHeader.offsetHeight;
+  let targetOffset = 0;
+  let currentOffset = 0;
+  let ticking = false;
 
   topHeader.classList.add("is-floating");
+
+  function renderHeaderPosition() {
+    currentOffset += (targetOffset - currentOffset) * 0.22;
+
+    if (Math.abs(targetOffset - currentOffset) < 0.2) {
+      currentOffset = targetOffset;
+    }
+
+    topHeader.style.transform = `translateY(-${currentOffset}px)`;
+
+    if (Math.abs(targetOffset - currentOffset) > 0.2) {
+      requestAnimationFrame(renderHeaderPosition);
+    } else {
+      ticking = false;
+    }
+  }
+
+  function queueRender() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(renderHeaderPosition);
+    }
+  }
+
+  window.addEventListener("resize", () => {
+    headerHeight = topHeader.offsetHeight;
+    targetOffset = Math.min(targetOffset, headerHeight);
+    queueRender();
+  });
 
   window.addEventListener("scroll", () => {
     const current = window.scrollY;
     const delta = current - lastScrollY;
+    lastScrollY = current;
 
-    if (current > 48 && delta > 0 && !hidden) {
-      topHeader.classList.add("is-hidden");
-      hidden = true;
-    } else if ((delta < 0 || current < 18) && hidden) {
-      topHeader.classList.remove("is-hidden");
-      hidden = false;
+    if (delta > 0) {
+      targetOffset = Math.min(headerHeight, targetOffset + delta);
+    } else if (delta < 0) {
+      targetOffset = Math.max(0, targetOffset + delta * 1.35);
     }
 
-    lastScrollY = current;
+    if (current < 12) {
+      targetOffset = 0;
+    }
+
+    queueRender();
   });
 }
 
